@@ -1,14 +1,30 @@
 'use strict'
 
 const fs = require('fs')
+const path = require('path')
 const https = require('https')
 
 const Koa = require('koa')
+const koaStatic = require('koa-static')
+const favicon = require('koa-favicon')
 const Promise = require('bluebird')
 
 const Config = require('../config/_index')
 
 const app = new Koa()
+
+app.use(koaStatic(path.normalize(__dirname, '../../frontend/scripts'), { maxage: 0, index: false }))
+
+// app.use(async (ctx, next) => {
+//
+//   console.log(ctx.url)
+//   if (/^\/frontend\/scripts/.test(ctx.url)) {
+//     ctx.type = 'text/plain'
+//     ctx.body = await fs.readFileSync('.' + ctx.url)
+//     return
+//   }
+//   await next()
+// })
 
 // app.use(function *(next) {
 //   this.body = 'hello world'
@@ -20,7 +36,9 @@ const app = new Koa()
 // })
 
 app.use(async function(ctx) {
-  ctx.body = 'hello lailin'
+  ctx.type = 'text/html'
+  ctx.body = await fs.readFileSync(`${Config.base.frontendPath}/index.html`)
+  // ctx.body = await 'lailin'
 })
 
 module.exports = () => {
