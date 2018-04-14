@@ -1,0 +1,24 @@
+{
+  "name": "honor",
+  "version": "1.0.0",
+  "description": "hello world!!!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tzhgkm/honor.git"
+  },
+  "author": "tzhgkm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tzhgkm/honor/issues"
+  },
+  "homepage": "https://github.com/tzhgkm/honor#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "koa": "^2.5.0",
+    "mongoose": "^5.0.14"
+  }
+}
