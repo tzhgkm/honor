@@ -22,5 +22,8 @@
     "koa-favicon": "^2.0.1",
     "koa-static": "^4.0.2",
     "mongoose": "^5.0.14"
+  },
+  "devDependencies": {
+    "vue": "^2.5.16"
   }
 }

@@ -13,7 +13,11 @@ const Config = require('../config/_index')
 
 const app = new Koa()
 
-app.use(koaStatic(path.normalize(__dirname, '../../frontend/scripts'), { maxage: 0, index: false }))
+app.use(favicon(path.join(Config.base.frontendPath, 'assets/favicon.png'), {
+  maxAge: 1000 * 60 * 60 * 24 * 30
+}))
+app.use(koaStatic(path.join(__dirname, '../../frontend'), { maxage: 0, index: false }))
+
 
 // app.use(async (ctx, next) => {
 //

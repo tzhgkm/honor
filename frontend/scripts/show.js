@@ -1,5 +1,9 @@
-;(function show() {
-  'use strict'
-  alert('tutu')
-})()
+'use strict'
+const app = new Vue({
+  el: '#app',
+  data: {
+    message: 'hello world!'
+  }
+})
+const name = 'tutu'
 
