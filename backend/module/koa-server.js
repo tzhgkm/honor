@@ -19,16 +19,17 @@ app.use(favicon(path.join(Config.base.frontendPath, 'assets/favicon.png'), {
 app.use(koaStatic(path.join(__dirname, '../../frontend'), { maxage: 0, index: false }))
 
 
-// app.use(async (ctx, next) => {
-//
-//   console.log(ctx.url)
-//   if (/^\/frontend\/scripts/.test(ctx.url)) {
-//     ctx.type = 'text/plain'
-//     ctx.body = await fs.readFileSync('.' + ctx.url)
-//     return
-//   }
-//   await next()
-// })
+app.use(async (ctx, next) => {
+
+  console.log(ctx.url)
+  if (/^\/node_modules\/vue/.test(ctx.url)) {
+    ctx.type = 'text/plain'
+    ctx.body = await fs.readFileSync(path.join(__dirname, '../..' + ctx.url))
+    // ctx.redirect('../..' + ctx.url)
+    return
+  }
+  await next()
+})
 
 // app.use(function *(next) {
 //   this.body = 'hello world'

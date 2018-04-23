@@ -1,32 +1,40 @@
 'use strict'
+
+// Vue.component('my-component', {
+//   template: '<span>{{comMessage}}</span>',
+//   data() {
+//     return {
+//       comMessage: 'hello component!!!'
+//     }
+//   },
+//   mounted() {
+//     console.log('component mounted')
+//   }
+// })
+
+var componentA = {
+  // template: '<div><span>{{comMessage}}</span><slot></slot>default</div>',
+  render(createElement) {
+    return createElement('div', this.$slots.default)
+  },
+  data() {
+    return {
+      comMessage: 'hello component!!!'
+    }
+  },
+  mounted() {
+    console.log('component mounted')
+  }
+}
+
 const app = new Vue({
+  components: {componentA},
   data: {
     message: 'hello world!',
     obj: {name: 'sss'},
     firstName: '',
     lastName: '',
     rawHtml: '<img src="show.js" onerror="alert(document.cookie)">'
-  },
-  beforeCreate() {
-    console.log('beforeCreated' + this.message)
-  },
-  created() {
-    console.log('created'  + this.message)
-  },
-  beforeMount() {
-    console.log('beforeMounted' + this.message)
-  },
-  mounted() {
-    const self = this
-    this.$nextTick(function () {
-      console.log('xxxx')
-      setTimeout(function () {
-        self.obj.name = 'hello'
-      }, 1000)
-    })
-  },
-  updated() {
-    console.log('updated' + this.message)
   },
   methods: {
     print() {
