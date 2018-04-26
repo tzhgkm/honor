@@ -6,6 +6,7 @@ const https = require('https')
 
 const Koa = require('koa')
 const koaStatic = require('koa-static')
+const router = require('../api/router')
 const favicon = require('koa-favicon')
 const Promise = require('bluebird')
 
@@ -18,18 +19,17 @@ app.use(favicon(path.join(Config.base.frontendPath, 'assets/favicon.png'), {
 }))
 app.use(koaStatic(path.join(__dirname, '../../frontend'), { maxage: 0, index: false }))
 
-
-app.use(async (ctx, next) => {
-
-  console.log(ctx.url)
-  if (/^\/node_modules\/vue/.test(ctx.url)) {
-    ctx.type = 'text/plain'
-    ctx.body = await fs.readFileSync(path.join(__dirname, '../..' + ctx.url))
-    // ctx.redirect('../..' + ctx.url)
-    return
-  }
-  await next()
-})
+// app.use(async (ctx, next) => {
+//
+//   console.log(ctx.url)
+//   if (/^\/node_modules\/vue/.test(ctx.url)) {
+//     ctx.type = 'text/plain'
+//     ctx.body = await fs.readFileSync(path.join(__dirname, '../..' + ctx.url))
+//     // ctx.redirect('../..' + ctx.url)
+//     return
+//   }
+//   await next()
+// })
 
 // app.use(function *(next) {
 //   this.body = 'hello world'
@@ -40,11 +40,7 @@ app.use(async (ctx, next) => {
 //   console.log(this.url)
 // })
 
-app.use(async function(ctx) {
-  ctx.type = 'text/html'
-  ctx.body = await fs.readFileSync(`${Config.base.frontendPath}/index.html`)
-  // ctx.body = await 'lailin'
-})
+router(app)
 
 module.exports = () => {
   const options = {

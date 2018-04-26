@@ -1,5 +1,6 @@
 'use strict'
 
+import Vue from 'vue'
 // Vue.component('my-component', {
 //   template: '<span>{{comMessage}}</span>',
 //   data() {
@@ -30,7 +31,7 @@ var componentA = {
 const app = new Vue({
   components: {componentA},
   data: {
-    message: 'hello world!',
+    message: '1111!!',
     obj: {name: 'sss'},
     firstName: '',
     lastName: '',
@@ -65,4 +66,3 @@ const app = new Vue({
 // app.$mount('#app')
 
 export default app
-
