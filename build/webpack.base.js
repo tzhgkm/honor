@@ -4,6 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const pkg = require('../package.json')
 const path = require('path')
 
+const { VueLoaderPlugin } = require('vue-loader')
+
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// const extractCss = new ExtractTextPlugin('vendor.[contenthash:8].css')
+
 module.exports = {
   mode: 'production',
 
@@ -16,6 +21,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, '../dist/' + pkg.name + '/frontend'),
+    publicPath: '/',
     filename: '[name].js'
   },
 
@@ -23,6 +29,10 @@ module.exports = {
     alias: {
       vue$: 'vue/dist/vue.common.js'
     }
+  },
+
+  devServer: {
+    hot: true
   },
 
   module: {
@@ -37,7 +47,20 @@ module.exports = {
             configFile: 'frontend/.eslintrc.js'
           }
         }
+      },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
       }
+      // {
+      //   test: /\.js$/,
+      //   exclude: [/node_modules/],
+      //   use: 'babel-loader'
+      // },
+      // {
+      //   test: /\.styl/,
+      //   use: extractCss.extract(['css-loader', 'stylus-loader'])
+      // },
     ]
   },
 
@@ -45,7 +68,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './tpl.html',
       filename: 'main.html'
-    })
+    }),
+    new VueLoaderPlugin()
   ],
 
   optimization: {

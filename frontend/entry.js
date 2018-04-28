@@ -1,5 +1,7 @@
 'use strict'
 
-import app from './scripts/show'
+import Vue from 'vue'
+import index from './components/index/index.vue'
+const app = new Vue({ components: { index } })
 
 app.$mount('#app')

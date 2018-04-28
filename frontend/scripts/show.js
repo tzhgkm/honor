@@ -20,7 +20,7 @@ var componentA = {
   },
   data() {
     return {
-      comMessage: 'hello component!!!'
+      comMessage: 'hel000nt!!!'
     }
   },
   mounted() {
@@ -31,7 +31,7 @@ var componentA = {
 const app = new Vue({
   components: {componentA},
   data: {
-    message: '1111!!',
+    message: '00!',
     obj: {name: 'sss'},
     firstName: '',
     lastName: '',
